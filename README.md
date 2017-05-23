@@ -1,0 +1,1 @@
+# Kotlin#### 1.初识Kotlin好奇，		1.简洁，有点像H5。		2.写了个Hello Kotlin差点没find出来TextView。		3.网上主要介绍的还是可以解决NullPointerException，但如果没有提高运行速度或实际意义，推广会比较困难。
