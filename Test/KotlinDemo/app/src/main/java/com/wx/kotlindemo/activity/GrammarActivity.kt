@@ -41,6 +41,10 @@ class GrammarActivity : BaseActivity() {
         (findViewById(R.id.btn_5) as Button).setOnClickListener(View.OnClickListener {
             testIn()
         })
+        (findViewById(R.id.btn_6) as Button).text = "初识集合(链式)"
+        (findViewById(R.id.btn_6) as Button).setOnClickListener(View.OnClickListener {
+            testList()
+        })
     }
 
     override fun initData() {
@@ -106,6 +110,19 @@ class GrammarActivity : BaseActivity() {
 
     }
 
+    //-----6.初识集合-----
+    fun testList() {
+        val data = listOf<String>("apple","banana","car","driver","average","advance")
+        data.filter {
+            it.startsWith("a")
+        }.sortedBy {
+            it
+        }.map {
+            it.toUpperCase()
+        }.forEach {
+            println("=========>>"+it)
+        }
+    }
 
 }
 
