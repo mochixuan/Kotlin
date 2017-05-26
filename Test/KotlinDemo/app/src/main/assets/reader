@@ -1,0 +1,9 @@
+                                                  KotLin
+资料：
+      (官网中文文档) https://www.kotlincn.net/docs/reference/basic-syntax.html
+      listOf用法 http://www.cnblogs.com/figozhg/p/5031398.html
+      所有集合 http://blog.csdn.net/coder_pig/article/details/53164424
+
+1.val修饰变量是只读变量即只能赋值一次,再次赋值时就会编译错误,如果我们需要多次修改值就需要使用var.
+
+2.switch 被 when替代了 else 相当于switch里的default
