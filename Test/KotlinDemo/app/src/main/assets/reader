@@ -3,7 +3,79 @@
       (官网中文文档) https://www.kotlincn.net/docs/reference/basic-syntax.html
       listOf用法 http://www.cnblogs.com/figozhg/p/5031398.html
       所有集合 http://blog.csdn.net/coder_pig/article/details/53164424
+      Kotlin http://shanghai.kotliner.cn/2017/02/12/2017-02-12-01/
 
 1.val修饰变量是只读变量即只能赋值一次,再次赋值时就会编译错误,如果我们需要多次修改值就需要使用var.
 
 2.switch 被 when替代了 else 相当于switch里的default
+
+3.files?.size 只会在 files不为空时执行
+
+4.kotlinThree : 如果你是开发 Android library 程序，建议你不要使用 Kotlin 代码。因为作为 library，如果使用它的工程是纯 Java 完成的，引入后会额外增大 200k 左右大小，同时它有可能会造成某些情况下编译异常。
+
+5.Java 有 static 关键字，在 Kotlin 中没有这个关键字，你需要使用 @JvmStatic 替代这个关键字，同样，在 Kotlin 中也有很多的关键字是 Java 中是没有的。例如 in,is,data等。如果 Java 中使用了这些关键字，需要加上反引号(`)转义来避免冲突。
+
+6.与 Java 不同，Kotlin 允许函数独立存在，而不必依赖于某个类，这类函数我们称之为包级别函数(Package-Level Functions)。
+  为了兼容 Java，Kotlin 默认会将所有的包级别函数放在一个自动生成的叫 ExampleKt 的类中， 在 Java 中想要调用包级别函数时，需要通过这个类来调用。
+  当然，也是可以自定义的，你只需要通过注解 @file:JvmName("Example") 即可将当前文件中的所有包级别函数放到一个自动生成的名为 Example 的类中。
+
+7.Kotlin 默认会为每个变量和方法添加 final 修饰符。这么做的目的是为了程序运行的性能，其实在 Java 程序中，你也应该尽可能为每个类添加final。
+  为每个类加了 final 也就是说，在 Kotlin 中默认每个类都是不可被继承的。如果你确定这个类是会被继承的，那么你需要给这个类添加 open 修饰符。
+
+8.在 Kotlin 中,用 is 来判断一个对象是否是某个类的实例,用 as 来做强转。
+
+9.由于 `Kotlin` 没有静态方法。在大多数情况下，官方建议是简单地使用 包级 函数。如果你需要写一个可以无需用一个类的实例来调用、但需要访问类内部的函数(例如,工厂方法或单利),你可以把它写成一个用 `companion` 修饰的对象内的方法。我们称 `companion` 修饰的对象为伴生对象。
+
+10.Kotlin 的函数有一些非常有意思的特性，比如函数中再声明函数。
+
+11.for (i in 1 until 100) { …… } // 半开区间：不包含 100。
+
+12.Kotlin 的接口与 Java 8 类似，既包含抽象方法的声明，也包含 实现。与抽象类不同的是，接口无法保存状态。它可以有 属性但必须声明为抽象或提供访问器实现。
+
+13. val jane = User("Jane", 35) //这样也行
+    val (name, age) = jane
+    println("$name, $age years of age") // 输出 "Jane, 35 years of age"
+
+14.sealed:要声明一个密封类，需要在类名前面添加 sealed 修饰符。虽然密封类也可以 有子类，但是所有子类都必须在与密封类自身相同的文件中声明。
+
+15.out:在 Kotlin 中，有一种方法向编译器解释这种情况。这称为声明处型变：我们可以标注 Source 的类型参数 T 来确保它仅从 Source<T> 成员中返回（生产），并从不被消费。为此，我们提供 out 修饰符。
+
+16.类可以标记为 inner 以便能够访问外部类的成员。内部类会带有一个对外部类的对象的引用。
+
+17.by:委托 https://www.kotlincn.net/docs/reference/delegation.html .
+
+18. lazy() 是接受一个 lambda 并返回一个 Lazy <T> 实例的函数，返回的实例可以作为实现延迟属性的委托： 第一次调用 get() 会执行已传递给 lazy() 的 lamda 表达式并记录结果， 后续调用 get() 只是返回记录的结果。
+
+19. infix() 中缀表示法
+
+20. 伸展（spread）操作符（在数组前面加 *）
+    val a = arrayOf(1, 2, 3)
+    val list = asList(-1, 0, *a, 4)
+
+21. inline 修饰符影响函数本身和传给它的 lambda 表达式：所有这些都将内联 到调用处。
+
+22. 可能遍历一个映射（map）最好的方式就是这样：
+    for ((key, value) in map) {
+       // 使用该 key、value 做些事情
+    }
+
+23. 下划线用于未使用的变量 如果在解构声明中你不需要某个变量，那么可以用下划线取代其名称 val (_, status) = getResult().
+
+24. downTo:如果你想倒序迭代数字呢？也很简单。你可以使用标准库中定义的 downTo() 函数。
+
+25. step(): 间隔
+
+26. until:要创建一个不包括其结束元素的区间，可以使用 until 函数
+    for (i in 1 until 10) {   // i in [1, 10) 排除了 10
+         println(i)
+    }
+
+27. this@A : https://www.kotlincn.net/docs/reference/this-expressions.html .
+
+28. 引用相等由 ===（以及其否定形式 !==）操作判断。a === b 当且仅当 a 和 b 指向同一个对象时求值为 true。
+    结构相等由 ==（以及其否定形式 !=）操作判断。按照惯例，像 a == b 这样的表达式会翻译成
+    a?.equals(b) ?: (b === null)
+
+29. 注解: https://www.kotlincn.net/docs/reference/annotations.html
+
+30. 

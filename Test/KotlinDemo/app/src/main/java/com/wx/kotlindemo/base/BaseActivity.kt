@@ -37,4 +37,9 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
+    //-----扩展-----
+    fun Activity.toast(message: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
+        Toast.makeText(this, message, duration).show()
+    }
+
 }

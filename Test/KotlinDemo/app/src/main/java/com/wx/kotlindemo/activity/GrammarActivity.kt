@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.Button
 import com.wx.kotlindemo.R
 import com.wx.kotlindemo.base.BaseActivity
+import com.wx.kotlindemo.utils.StringUtils
 
 class GrammarActivity : BaseActivity() {
 
@@ -41,10 +42,33 @@ class GrammarActivity : BaseActivity() {
         (findViewById(R.id.btn_5) as Button).setOnClickListener(View.OnClickListener {
             testIn()
         })
+
         (findViewById(R.id.btn_6) as Button).text = "初识集合(链式)"
         (findViewById(R.id.btn_6) as Button).setOnClickListener(View.OnClickListener {
             testList()
         })
+
+        (findViewById(R.id.btn_7) as Button).text = "简单的类"
+        (findViewById(R.id.btn_7) as Button).setOnClickListener(View.OnClickListener {
+            testClass()
+        })
+
+        (findViewById(R.id.btn_8) as Button).text = "默认参数"
+        (findViewById(R.id.btn_8) as Button).setOnClickListener(View.OnClickListener {
+            defaultConfig()
+            defaultConfig("xuan")
+        })
+
+        (findViewById(R.id.btn_9) as Button).text = "将函数作为参数"
+        (findViewById(R.id.btn_9) as Button).setOnClickListener(View.OnClickListener {
+            lock { defaultConfig() }
+        })
+
+        (findViewById(R.id.btn_10) as Button).text = "静态"
+        (findViewById(R.id.btn_10) as Button).setOnClickListener(View.OnClickListener {
+            testStatic()
+        })
+
     }
 
     override fun initData() {
@@ -114,14 +138,40 @@ class GrammarActivity : BaseActivity() {
     fun testList() {
         val data = listOf<String>("apple","banana","car","driver","average","advance")
         data.filter {
-            it.startsWith("a")
+            it.startsWith("a")      //过滤
         }.sortedBy {
-            it
+            it                      //顺序
         }.map {
-            it.toUpperCase()
+            it.toUpperCase()        //变大写
         }.forEach {
             println("=========>>"+it)
         }
+    }
+
+    //-----7.简单的类 加data就相当于提示数据类型-----
+    data class Person(val name:String,val age:Int) {
+
+    }
+    fun testClass() {
+        val person = Person("wang",21)
+        println("===========>>"+person.name+"   "+person.age)
+        println("===========>>"+person.toString())
+    }
+
+    //-----8.默认参数-----
+    fun defaultConfig(data : String = "wang") {
+        System.out.println("====================>>"+data)
+    }
+
+    //-----9.将函数作为参数-----
+    fun <T> lock(body : () -> T ) : T {
+        return body()
+    }
+
+    //-----10.静态-----
+    fun testStatic() {
+        StringUtils.isEmpty(null)
+        StringUtils.StringUtils1.isEmpty("wang")
     }
 
 }
